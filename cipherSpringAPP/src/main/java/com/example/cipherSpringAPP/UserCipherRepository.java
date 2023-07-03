@@ -11,7 +11,7 @@ public interface UserCipherRepository extends JpaRepository<UserCyphers, Long> {
 
     //List<UserCipherData> findByLogin(String username);
 
-    List<UserCyphers> findAllByUserId(Long userId);
+    //List<UserCyphers> findAllByUserId(Long userId);
 
 }
 

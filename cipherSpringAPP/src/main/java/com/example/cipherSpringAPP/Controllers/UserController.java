@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,9 +33,10 @@ public class UserController {
     }*/
 
     @GetMapping(value = "/userTable")
-    public String getLogin(Model model) {
-        List<Long> idList = Collections.singletonList(9L);
-        List<UserCyphers> userCipherData = userCipherRepository.findAllById(idList);
+    public String getLogin(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+
+        List<UserCyphers> userCipherData = userCipherRepository.findAllById(Collections.singleton((Long) session.getAttribute("user_id")));
         model.addAttribute("requestDataList",userCipherData);
         return "crypting";
     }

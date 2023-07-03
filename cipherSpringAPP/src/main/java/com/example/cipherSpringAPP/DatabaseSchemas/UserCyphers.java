@@ -1,11 +1,17 @@
 package com.example.cipherSpringAPP.DatabaseSchemas;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "request_list")
 public class UserCyphers {
+
+    public UserCyphers() {
+    }
 
     public Long getId() {
         return id;
@@ -50,6 +56,7 @@ public class UserCyphers {
     private String cipherType;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     @Column(name = "created_on")
     private Date createdOn;
 
@@ -58,7 +65,12 @@ public class UserCyphers {
     @JoinColumn(name = "user_id")
     private Users user;
 
-    public void setUser(Users user) {
+
+    public UserCyphers(String plaintext, String cryptedText, String decryptedText, String cipherType, Users user) {
+        this.plaintext = plaintext;
+        this.cryptedText = cryptedText;
+        this.decryptedText = decryptedText;
+        this.cipherType = cipherType;
         this.user = user;
     }
 }

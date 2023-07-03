@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class LoginController {
     private final GetUsersDatabaseRepository userRepository;
@@ -19,10 +22,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String postLogin(Model model, @RequestParam String username, @RequestParam String password) {
+    public String postLogin(HttpServletRequest request, Model model, @RequestParam String username, @RequestParam String password) {
+        HttpSession session = request.getSession();
         Users user = userRepository.findByLogin(username);
         // Vykonať potrebnú logiku overenia hesla a presmerovania
         if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user_id",user.getId());
             // Overenie úspešné, presmerovať na ďalšiu stránku
             return "redirect:/userTable?userId=" ;//+ userId;
         } else {

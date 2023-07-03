@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
@@ -24,7 +25,8 @@ public class LoginAppController {
 
     @PostMapping("/loginApp")
     @ResponseBody
-    public String postLogin(HttpSession session, @RequestParam String username, @RequestParam String password) {
+    public String postLogin(HttpServletRequest request, @RequestParam String username, @RequestParam String password) {
+        HttpSession session = request.getSession();
         Users user = userRepository.findByLogin(username);
         // Vykonať potrebnú logiku overenia hesla a presmerovania
         if (user != null && user.getPassword().equals(password)) {
@@ -36,6 +38,8 @@ public class LoginAppController {
                 session.setAttribute("role", "USER");
             }
             session.setAttribute("login", username);
+            session.setAttribute("user",user);
+            System.out.println("&LOGIN SESH" + session.getId());
             // Overenie úspešné, vrátiť "success" ako odpoveď
             return "success";
         } else {
