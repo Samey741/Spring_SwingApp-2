@@ -78,6 +78,7 @@
 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required><br>
+      <input type="hidden" id="userId" name="userId" value="<%= request.getParameter("userId") %>">
       <input type="submit" value="Login">
     </form>
   </div>

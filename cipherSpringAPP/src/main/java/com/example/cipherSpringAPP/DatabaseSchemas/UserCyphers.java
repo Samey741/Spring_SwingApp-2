@@ -1,11 +1,11 @@
-package com.example.cipherSpringAPP;
+package com.example.cipherSpringAPP.DatabaseSchemas;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "request_list")
-public class UserCipherData {
+public class UserCyphers {
 
     public Long getId() {
         return id;
@@ -31,9 +31,6 @@ public class UserCipherData {
         return createdOn;
     }
 
-   public GetUsersDatabase getUser() {
-       return user;
-   }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,9 +53,12 @@ public class UserCipherData {
     @Column(name = "created_on")
     private Date createdOn;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private GetUsersDatabase user;
+    private Users user;
 
-
+    public void setUser(Users user) {
+        this.user = user;
+    }
 }

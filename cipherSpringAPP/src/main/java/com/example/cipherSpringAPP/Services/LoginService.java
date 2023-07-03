@@ -1,10 +1,9 @@
 package com.example.cipherSpringAPP.Services;
 
-import com.example.cipherSpringAPP.GetUsersDatabase;
+import com.example.cipherSpringAPP.DatabaseSchemas.Users;
 import com.example.cipherSpringAPP.GetUsersDatabaseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class LoginService {
     }
 
     public void printUsers() {
-        List<GetUsersDatabase> users = usersRepository.findAll();
-        for (GetUsersDatabase user : users) {
+        List<Users> users = usersRepository.findAll();
+        for (Users user : users) {
             System.out.println("ID: " + user.getId());
             System.out.println("Username: " + user.getLogin());
             System.out.println("Password: " + user.getPassword());

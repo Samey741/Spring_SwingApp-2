@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.cipherSpringAPP.UserCipherData" %>
+<%@ page import="com.example.cipherSpringAPP.DatabaseSchemas.UserCyphers" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -18,8 +18,8 @@
         <th>Cipher type</th>
         <th>Timestamp</th>
     </tr>
-    <% List<UserCipherData> requestDataList = (List<UserCipherData>) request.getAttribute("requestDataList");
-        for (UserCipherData requestData : requestDataList) { %>
+    <% List<UserCyphers> requestDataList = (List<UserCyphers>) request.getAttribute("requestDataList");
+        for (UserCyphers requestData : requestDataList) { %>
     <tr>
         <td><%= requestData.getId() %></td>
         <td><%= requestData.getPlaintext() %></td>
