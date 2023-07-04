@@ -7,7 +7,9 @@
   <body>
     <h1><%= "Choose action!" %></h1>
     <br/>
-    <a href="registration.jsp">Registrovať sa</a>
+    <form action="register" method="GET">
+      <input type="submit" value="Registrovat sa">
+    </form>
     <br/>
     <br/>
     <form action="login" method="GET">

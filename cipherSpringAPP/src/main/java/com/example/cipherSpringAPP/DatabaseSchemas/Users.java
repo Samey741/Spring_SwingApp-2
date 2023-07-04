@@ -6,6 +6,10 @@ import java.util.List;
 @Entity // pre hibernate
 @Table(name = "users")
 public class Users {
+    public Users(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
