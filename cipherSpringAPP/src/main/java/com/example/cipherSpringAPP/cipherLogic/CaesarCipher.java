@@ -7,7 +7,7 @@ public class CaesarCipher implements CryptingGeneral {
 
     @Override
     public String encrypt(String plaintext) throws TooLongException {
-        if(plaintext.length() > 10 )
+        if(plaintext.length() > 100 )
             throw new TooLongException();
 
         StringBuilder ciphertext = new StringBuilder();

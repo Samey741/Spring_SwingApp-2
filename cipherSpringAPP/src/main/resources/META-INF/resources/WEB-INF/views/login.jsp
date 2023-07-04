@@ -5,6 +5,7 @@
   Time: 12:30
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -68,10 +69,10 @@
 <body>
   <div class="form-container">
     <h2>Login</h2>
-    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
-    <% if (errorMessage != null) { %>
-    <p class="error-message"><%= errorMessage %></p>
-    <% } %>
+    <c:set var="errorMessage" value="${requestScope.errorMessage}" />
+    <c:if test="${not empty errorMessage}">
+      <p class="error-message"><c:out value="${errorMessage}" /></p>
+    </c:if>
     <form action="login" method="POST">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required><br>

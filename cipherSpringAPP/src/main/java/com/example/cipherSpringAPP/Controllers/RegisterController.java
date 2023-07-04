@@ -1,11 +1,7 @@
 package com.example.cipherSpringAPP.Controllers;
 
 
-import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
-import com.example.cipherSpringAPP.DatabaseSchemas.UserCyphers;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.GetUsersDatabaseRepository;
-import com.example.cipherSpringAPP.RoleRepository;
 import com.example.cipherSpringAPP.Services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 public class RegisterController {

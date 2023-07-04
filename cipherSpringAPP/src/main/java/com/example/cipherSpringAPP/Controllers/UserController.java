@@ -1,7 +1,7 @@
 package com.example.cipherSpringAPP.Controllers;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.UserCyphers;
-import com.example.cipherSpringAPP.UserCipherRepository;
+import com.example.cipherSpringAPP.Repositories.UserCipherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,15 +22,6 @@ public class UserController {
         this.userCipherRepository = userCipherRepository;
     }
 
-    /*@GetMapping(value = "/userTable")
-    public String postLogin(Model model, @RequestParam String username, @RequestParam String password) {
-
-        // Overenie úspešné,  načítať záznamy
-        List<UserCipherData> userCipherData = userCipherRepository.findByUserUsername(username);
-        model.addAttribute("requestDataList", userCipherData);
-        return "crypting";
-
-    }*/
 
     @GetMapping(value = "/userTable")
     public String getLogin(HttpServletRequest request, Model model) {

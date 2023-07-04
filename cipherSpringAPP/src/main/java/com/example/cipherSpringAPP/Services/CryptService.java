@@ -3,8 +3,10 @@ package com.example.cipherSpringAPP.Services;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.UserCyphers;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.UserCipherRepository;
+import com.example.cipherSpringAPP.Repositories.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Repositories.UserCipherRepository;
 import com.example.cipherSpringAPP.cipherLogic.DecideCipherCryptType;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,15 @@ import java.util.Objects;
 @Service
 public class CryptService {
 
+
+    private final UserCipherRepository userCiphersRepository;
+    private final GetUsersDatabaseRepository getUsersDatabaseRepository;
     @Autowired
-    private UserCipherRepository userCiphersRepository;
+    public CryptService(GetUsersDatabaseRepository getUsersDatabaseRepository,UserCipherRepository userCiphersRepository){
+        this.getUsersDatabaseRepository = getUsersDatabaseRepository;
+        this.userCiphersRepository = userCiphersRepository;
+
+    }
 
     public String cryptCipher(HttpServletRequest request, String inputText , String cipherType , String action)throws Exception{
         DecideCipherCryptType decideCipher = new DecideCipherCryptType();
@@ -29,7 +38,8 @@ public class CryptService {
             throw e;
         }
         if(Objects.equals(action, "encrypt")){
-            UserCyphers userCyphers = new UserCyphers(inputText, actionResponse, inputText, cipherType, (Users) session.getAttribute("user"));
+            Users user = getUsersDatabaseRepository.findUsersById((Long) session.getAttribute("user_id"));
+            UserCyphers userCyphers = new UserCyphers(inputText, actionResponse, inputText, cipherType,user );
             try {
                 userCiphersRepository.save(userCyphers);
             }catch (IllegalArgumentException e){

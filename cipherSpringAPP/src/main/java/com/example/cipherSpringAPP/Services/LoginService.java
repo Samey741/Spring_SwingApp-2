@@ -2,7 +2,7 @@ package com.example.cipherSpringAPP.Services;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Repositories.GetUsersDatabaseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

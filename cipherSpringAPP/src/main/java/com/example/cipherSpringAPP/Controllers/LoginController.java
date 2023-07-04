@@ -1,8 +1,7 @@
 package com.example.cipherSpringAPP.Controllers;
 
-import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Repositories.GetUsersDatabaseRepository;
 import com.example.cipherSpringAPP.Services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class LoginController {
@@ -41,9 +38,9 @@ public class LoginController {
             session.setAttribute("roles", userRoles);
             session.setAttribute("user_id",user.getId());
             // Overenie úspešné, presmerovať na ďalšiu stránku
-            return "redirect:/userTable" ;//+ userId;
+            return "redirect:/userTable" ;
         } else {
-            // Overenie neúspešné, pridajte správu o chybe do modelu a vráťte sa na prihlasovaciu stránku
+            // Overenie neúspešné, pridajte správu o chybe do modelu a vratenie sa na prihlasovaciu stránku
             model.addAttribute("errorMessage", "Neplatné meno alebo heslo");
             return "login";
         }

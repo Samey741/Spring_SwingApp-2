@@ -30,10 +30,8 @@ public class AES_Cipher implements CryptingGeneral {
         String encryptedText = "Error";
         try {
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-
             // Šifrovanie textu
             byte[] encryptedBytes = cipher.doFinal(input.getBytes(StandardCharsets.UTF_8));
-
             // Prevedenie šifrovaného textu na reťazec vo formáte Base64
             encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
         } catch (Exception e) {
@@ -47,19 +45,10 @@ public class AES_Cipher implements CryptingGeneral {
         String decryptedText = "Error";
         try {
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
-
             // Odstránenie znakov '\r' zo šifrovaného textu
             encryptedText = encryptedText.replaceAll("\r", "");
-
             // Dekódovanie šifrovaného textu z reťazca Base64
-            byte[] decryptedBytes = null;
-            try {
-                decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
-            }catch (Exception e){
-                System.out.println(e);
-            }
-
-
+            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
             // Prevod dešifrovaného textu na reťazec
             decryptedText = new String(decryptedBytes, StandardCharsets.UTF_8);
         } catch (Exception e) {

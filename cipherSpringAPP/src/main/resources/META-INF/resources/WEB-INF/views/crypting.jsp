@@ -20,17 +20,17 @@
                 <th>Cipher type</th>
                 <th>Timestamp</th>
             </tr>
-            <% List<UserCyphers> requestDataList = (List<UserCyphers>) request.getAttribute("requestDataList");
-                for (UserCyphers requestData : requestDataList) { %>
-            <tr>
-                <td><%= requestData.getId() %></td>
-                <td><%= requestData.getPlaintext() %></td>
-                <td><%= requestData.getCryptedText() %></td>
-                <td><%= requestData.getDecryptedText() %></td>
-                <td><%= requestData.getCipherType() %></td>
-                <td><%= requestData.getCreatedOn() %></td>
-            </tr>
-            <% } %>
+            <jsp:useBean id="requestDataList" scope="request" type="java.util.List"/>
+            <c:forEach var="requestData" items="${requestDataList}">
+                <tr>
+                    <td>${requestData.id}</td>
+                    <td>${requestData.plaintext}</td>
+                    <td>${requestData.cryptedText}</td>
+                    <td>${requestData.decryptedText}</td>
+                    <td>${requestData.cipherType}</td>
+                    <td>${requestData.createdOn}</td>
+                </tr>
+            </c:forEach>
         </table>
         <br/>
         <c:if test="${sessionScope.roles.contains('ADMIN')}">

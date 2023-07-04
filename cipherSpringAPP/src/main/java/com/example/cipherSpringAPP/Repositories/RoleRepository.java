@@ -1,4 +1,4 @@
-package com.example.cipherSpringAPP;
+package com.example.cipherSpringAPP.Repositories;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
 import com.example.cipherSpringAPP.DatabaseSchemas.UserCyphers;
