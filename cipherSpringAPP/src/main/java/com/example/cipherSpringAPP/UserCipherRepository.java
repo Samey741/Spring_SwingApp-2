@@ -9,9 +9,6 @@ import java.util.List;
 @Repository
 public interface UserCipherRepository extends JpaRepository<UserCyphers, Long> {
 
-    //List<UserCipherData> findByLogin(String username);
-
-    //List<UserCyphers> findAllByUserId(Long userId);
 
 }
 

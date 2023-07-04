@@ -12,16 +12,4 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    private final LoginService loginService;
-
-    @Autowired
-    public IndexController(LoginService loginService) {
-        this.loginService = loginService;
-    }
-
-    //@PostMapping("/login")
-    //public String postLogin(Model model, @RequestParam("login") String login, @RequestParam("password") String password) {
-    //    model.addAttribute("error", "testFunguje");
-    //    return "login";
-    //}
 }

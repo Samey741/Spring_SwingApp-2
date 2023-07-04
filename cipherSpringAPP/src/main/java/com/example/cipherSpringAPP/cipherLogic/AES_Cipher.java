@@ -52,7 +52,13 @@ public class AES_Cipher implements CryptingGeneral {
             encryptedText = encryptedText.replaceAll("\r", "");
 
             // Dekódovanie šifrovaného textu z reťazca Base64
-            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            byte[] decryptedBytes = null;
+            try {
+                decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            }catch (Exception e){
+                System.out.println(e);
+            }
+
 
             // Prevod dešifrovaného textu na reťazec
             decryptedText = new String(decryptedBytes, StandardCharsets.UTF_8);

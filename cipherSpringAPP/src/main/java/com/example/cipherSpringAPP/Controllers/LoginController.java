@@ -3,6 +3,7 @@ package com.example.cipherSpringAPP.Controllers;
 import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
 import com.example.cipherSpringAPP.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +20,13 @@ import java.util.Objects;
 @Controller
 public class LoginController {
     private final GetUsersDatabaseRepository userRepository;
+    private final LoginService loginService;
 
     @Autowired
-    public LoginController(GetUsersDatabaseRepository userRepository) {
+    public LoginController(GetUsersDatabaseRepository userRepository,LoginService loginService) {
+
         this.userRepository = userRepository;
+        this.loginService = loginService;
     }
 
     @PostMapping("/login")
@@ -30,17 +34,12 @@ public class LoginController {
         HttpSession session = request.getSession();
         Users user = userRepository.findByLogin(username);
 
-        //List<Roles> userRoles = user.getRoles();
-        //ArrayList<String> userRoleData;
-
         // Vykonať potrebnú logiku overenia hesla a presmerovania
         if (user != null && user.getPassword().equals(password)) {
-            if(Objects.equals(username, "admin")){
-                session.setAttribute("role", "ADMIN");
-            }
-            else {
-                session.setAttribute("role", "USER");
-            }
+            // Uložiť role do session
+            List<String> userRoles = loginService.getUserRoles(username);
+            session.setAttribute("roles", userRoles);
+            session.setAttribute("user_id",user.getId());
             // Overenie úspešné, presmerovať na ďalšiu stránku
             return "redirect:/userTable" ;//+ userId;
         } else {

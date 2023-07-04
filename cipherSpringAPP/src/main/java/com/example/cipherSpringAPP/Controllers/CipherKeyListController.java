@@ -28,6 +28,7 @@ public class CipherKeyListController {
         catch(Exception exc){
             exc.printStackTrace();
             System.out.println("AES Cipher Problem \n");
+            return null;
         }
         return keyList;
     }

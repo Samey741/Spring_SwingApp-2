@@ -16,7 +16,6 @@ public class AllCiphersFilterAdmin implements Filter {
 
         // Získanie prihlaseného používateľa alebo jeho role
         ArrayList<String> role = getRoleFromSession(httpRequest);
-
         // Kontrola prístupových práv na základe role
         if (role.contains("ADMIN")) {
             // Ak je používateľ admin, umožni prístup k servletom
@@ -30,8 +29,7 @@ public class AllCiphersFilterAdmin implements Filter {
 
     private ArrayList<String> getRoleFromSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        System.out.println("Session vo filtri" + session.getId());
-        return  (ArrayList<String>) session.getAttribute("role");
+        return  (ArrayList<String>) session.getAttribute("roles");
 
     }
 

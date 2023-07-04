@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GetUsersDatabaseRepository extends JpaRepository<Users, Long> {
-    // Prípadne definujte ďalšie metódy potrebné pre prácu s databázou
     Users findByLogin(String login);
 
 }

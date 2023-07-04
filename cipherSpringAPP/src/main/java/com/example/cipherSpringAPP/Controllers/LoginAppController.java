@@ -1,7 +1,9 @@
 package com.example.cipherSpringAPP.Controllers;
 
+import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
 import com.example.cipherSpringAPP.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +14,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
 public class LoginAppController {
     private final GetUsersDatabaseRepository userRepository;
+    private final LoginService loginService;
 
     @Autowired
-    public LoginAppController(GetUsersDatabaseRepository userRepository) {
+    public LoginAppController(GetUsersDatabaseRepository userRepository, LoginService loginService) {
         this.userRepository = userRepository;
+        this.loginService = loginService;
     }
 
     @PostMapping("/loginApp")
@@ -30,20 +36,14 @@ public class LoginAppController {
         Users user = userRepository.findByLogin(username);
         // Vykonať potrebnú logiku overenia hesla a presmerovania
         if (user != null && user.getPassword().equals(password)) {
-
-            if(Objects.equals(username, "admin")){
-                session.setAttribute("role", "ADMIN");
-            }
-            else {
-                session.setAttribute("role", "USER");
-            }
             session.setAttribute("login", username);
             session.setAttribute("user",user);
-            System.out.println("&LOGIN SESH" + session.getId());
+            List<String> userRoles = loginService.getUserRoles(username);
+            session.setAttribute("roles", userRoles);
             // Overenie úspešné, vrátiť "success" ako odpoveď
             return "success";
         } else {
-            return "Neplatné meno alebo heslo";
+            return "fail";
         }
     }
 }

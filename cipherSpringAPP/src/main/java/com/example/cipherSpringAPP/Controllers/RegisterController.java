@@ -6,6 +6,7 @@ import com.example.cipherSpringAPP.DatabaseSchemas.UserCyphers;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
 import com.example.cipherSpringAPP.GetUsersDatabaseRepository;
 import com.example.cipherSpringAPP.RoleRepository;
+import com.example.cipherSpringAPP.Services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,38 +20,23 @@ import java.util.List;
 
 @Controller
 public class RegisterController {
-    private final GetUsersDatabaseRepository userRepository;
-    private final RoleRepository rolesRepository;
+    private final RegistrationService registrationService;
     @Autowired
-    public RegisterController(GetUsersDatabaseRepository userRepository,RoleRepository rolesRepository) {
-        this.userRepository = userRepository;
-        this.rolesRepository = rolesRepository;
+    public RegisterController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
 
     @PostMapping("/register")
     public String postLogin(HttpServletRequest request, Model model, @RequestParam String username, @RequestParam String password) {
-        HttpSession session = request.getSession();
         Users user = new Users(username,password);
-        try{
-            userRepository.save(user);
+        try {
+            registrationService.registerUser(user);
         }catch (IllegalArgumentException e){
-            System.out.println("Vlozenie nebolo uspešne \n");
+            model.addAttribute("errorMessage", "Vytvorenie uživatela nebolo uspešne");
+            return "registration";
         }
 
-
-        // Vyhľadanie role USER a získanie jej ID
-        List<Roles> userRole = rolesRepository.findByRole("USER");
-        if (userRole != null) {
-            // Pridanie role do zoznamu rolí pre používateľa
-            user.setRoles(userRole);
-            try {
-                userRepository.save(user);
-            }catch (IllegalArgumentException e){
-                System.out.println("Vlozenie nebolo uspešne \n");
-            }
-        }
-
-        return "redirect:/login" ;//+ userId;
+        return "redirect:/login" ;
     }
 
     @GetMapping(value = "/register")
