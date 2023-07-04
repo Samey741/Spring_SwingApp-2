@@ -22,7 +22,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.hibernate:hibernate-core:5.6.0.Final")
 	runtimeOnly("com.h2database:h2")
