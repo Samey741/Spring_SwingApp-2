@@ -1,7 +1,7 @@
 package com.example.cipherSpringAPP.Controllers;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.Repositories.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Repositories.UsersRepository;
 import com.example.cipherSpringAPP.Services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +15,11 @@ import java.util.List;
 
 @Controller
 public class LoginAppController {
-    private final GetUsersDatabaseRepository userRepository;
+    private final UsersRepository userRepository;
     private final LoginService loginService;
 
     @Autowired
-    public LoginAppController(GetUsersDatabaseRepository userRepository, LoginService loginService) {
+    public LoginAppController(UsersRepository userRepository, LoginService loginService) {
         this.userRepository = userRepository;
         this.loginService = loginService;
     }
@@ -31,9 +31,9 @@ public class LoginAppController {
         Users user = userRepository.findByLogin(username);
         // Vykonať potrebnú logiku overenia hesla a presmerovania
         if (user != null && user.getPassword().equals(password)) {
+            List<String> userRoles = loginService.getUserRoles(username);
             session.setAttribute("login", username);
             session.setAttribute("user_id",user.getId());
-            List<String> userRoles = loginService.getUserRoles(username);
             session.setAttribute("roles", userRoles);
             // Overenie úspešné, vrátiť "success" ako odpoveď
             return "success";

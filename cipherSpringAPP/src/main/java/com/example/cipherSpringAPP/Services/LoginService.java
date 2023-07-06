@@ -2,7 +2,7 @@ package com.example.cipherSpringAPP.Services;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.Repositories.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Repositories.UsersRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class LoginService {
 
     @Autowired
-    private GetUsersDatabaseRepository userRepository;
+    private UsersRepository userRepository;
 
     public List<String> getUserRoles(String username) {
         Users user = userRepository.findByLogin(username);

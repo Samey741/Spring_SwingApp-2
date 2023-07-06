@@ -20,7 +20,6 @@ public class CipherCryptController {
     }
 
 
-
     @PostMapping("/cipher")
     @ResponseBody
     public String postLogin(HttpServletRequest request, @RequestParam String inputText, @RequestParam String cipherType, @RequestParam String action) {

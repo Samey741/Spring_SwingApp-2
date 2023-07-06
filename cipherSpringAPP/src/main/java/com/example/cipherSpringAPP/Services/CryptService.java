@@ -3,10 +3,9 @@ package com.example.cipherSpringAPP.Services;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.UserCyphers;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.Repositories.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Repositories.UsersRepository;
 import com.example.cipherSpringAPP.Repositories.UserCipherRepository;
 import com.example.cipherSpringAPP.cipherLogic.DecideCipherCryptType;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +18,9 @@ public class CryptService {
 
 
     private final UserCipherRepository userCiphersRepository;
-    private final GetUsersDatabaseRepository getUsersDatabaseRepository;
+    private final UsersRepository getUsersDatabaseRepository;
     @Autowired
-    public CryptService(GetUsersDatabaseRepository getUsersDatabaseRepository,UserCipherRepository userCiphersRepository){
+    public CryptService(UsersRepository getUsersDatabaseRepository, UserCipherRepository userCiphersRepository){
         this.getUsersDatabaseRepository = getUsersDatabaseRepository;
         this.userCiphersRepository = userCiphersRepository;
 

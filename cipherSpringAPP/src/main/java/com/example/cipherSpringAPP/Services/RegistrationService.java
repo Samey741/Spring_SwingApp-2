@@ -3,7 +3,7 @@ package com.example.cipherSpringAPP.Services;
 
 import com.example.cipherSpringAPP.DatabaseSchemas.Roles;
 import com.example.cipherSpringAPP.DatabaseSchemas.Users;
-import com.example.cipherSpringAPP.Repositories.GetUsersDatabaseRepository;
+import com.example.cipherSpringAPP.Repositories.UsersRepository;
 import com.example.cipherSpringAPP.Repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.List;
 @Service
 public class RegistrationService {
 
-    private final GetUsersDatabaseRepository userRepository;
+    private final UsersRepository userRepository;
     private final RoleRepository rolesRepository;
     @Autowired
-    public RegistrationService(GetUsersDatabaseRepository userRepository,RoleRepository rolesRepository) {
+    public RegistrationService(UsersRepository userRepository, RoleRepository rolesRepository) {
         this.userRepository = userRepository;
         this.rolesRepository = rolesRepository;
     }

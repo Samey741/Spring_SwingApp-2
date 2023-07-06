@@ -26,8 +26,7 @@ public class UserController {
     @GetMapping(value = "/userTable")
     public String getLogin(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-
-        List<UserCyphers> userCipherData = userCipherRepository.findAllById(Collections.singleton((Long) session.getAttribute("user_id")));
+        List<UserCyphers> userCipherData = userCipherRepository.findAllByUserId((Long) session.getAttribute("user_id"));
         model.addAttribute("requestDataList",userCipherData);
         return "crypting";
     }
